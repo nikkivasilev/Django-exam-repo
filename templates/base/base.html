@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Magazin Slunce</title>
+    <!-- Static Load -->
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}"/>
+</head>
+
+<body>
+<div id="box">
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <img src="{% static 'images/contrast.png' %}" alt="sun">
+            <a href="{% url 'index' %}">HOME</a>
+
+            <ul>
+                <!--Only for user with created profile-->
+                {% if request.user.is_authenticated %}
+
+                    <li>
+                    <a href="{% url 'basket' %}">
+                        <img
+                                src="{% static 'images/shopping-basket.png' %}"
+                                alt="basket" style="width: 40px">
+                    </a>
+                    </li>
+                    <li><a href="{% url 'catalogue' %}">CATALOGUE</a></li>
+                    <li><a href="{% url 'details user' pk=request.user.pk %}">PROFILE</a></li>
+                    <li><a href="{% url 'logout user' %}">LOG OUT</a></li>
+
+                {% else %}
+                    <li><a href="{% url 'register user' %}">REGISTER</a></li>
+                    <li><a href="{% url 'login user' %}">LOG IN</a></li>
+                {% endif %}
+                {% if request.user.is_staff %}
+                    <li><a href="/admin">STAFF</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </header>
+    <!-- End Navigation Bar -->
+
+    {% block page_content %}
+
+    {% endblock %}
+    <!-- Main Content -->
+
+    <!-- Footer -->
+    <footer>
+        <div>
+            &copy;Magazin Slunce. All rights reserved.
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+</div>
+</body>
+</html>
+
+
+{#{% load static %}#}
+{#<!doctype html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport"#}
+{#          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">#}
+{#    <meta http-equiv="X-UA-Compatible" content="ie=edge">#}
+{#    <title>Document</title>#}
+{#    <link rel="stylesheet" href="{% static 'css/styles.css' %}">#}
+{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"#}
+{#          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">#}
+{#    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"#}
+{#            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"#}
+{#            crossorigin="anonymous"></script>#}
+{##}
+{#</head>#}
+{#<body>#}
+{##}
+{#</body>#}
+{#</html>#}
+{##}
+{#{% load static %}#}
+{##}
+{#<nav class="navbar navbar-expand" style="background-color: blanchedalmond">#}
+{#    <div class="container " >#}
+{#        <div class="navbar-brand ">#}
+{#            <!-- Link to Home Page -->#}
+{#            <a class="btn" href="{% url 'index' %}">#}
+{#                <img width="50px"#}
+{#                     src="{% static 'images/contrast.png' %}"#}
+{#                     alt="home_img">#}
+{#            </a>#}
+{#            <a class="btn" href="{% url 'index' %}">#}
+{#                <i>Home</i>#}
+{#            </a>#}
+{#        </div>#}
+{##}
+{#        <div class="container">#}
+{#            <ul class="navbar-nav align-items-end">#}
+{# This will be the cart           #}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="">#}
+{#                        <img width="16px"#}
+{#                             src="{% static 'images/shopping-basket.png' %}"#}
+{#                             alt="cart_img">#}
+{#                    </a>#}
+{#                </li>#}
+{#                {% if request.user.is_authenticated %}#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link" href="{% url 'details user' pk=request.user.pk %}">#}
+{#                            <i>Profile</i>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link" href="{% url 'logout user' %}">#}
+{#                            <i>Log out</i>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% else %}#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link" href="{% url 'register user' %}">#}
+{#                            <i>Register</i>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link" href="{% url 'login user' %}">#}
+{#                            <i>Log in</i>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+{#</nav>#}
+{##}
+{#{% block page_content %}#}
+{##}
+{#{% endblock %}#}
+

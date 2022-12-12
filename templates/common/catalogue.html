@@ -1,0 +1,52 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block page_content %}
+    <!-- Catalog with Albums-->
+    <section class="ProductPaginator">
+
+        {% if page_obj.has_previous %}
+            <a href="?page=1"><<</a>
+            <a href="?page={{ page_obj.previous_page_number }}"><</a>
+        {% else %}
+            <a><<</a>
+            <a><</a>
+        {% endif %}
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"><text>></text></a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">>></a>
+        {% else %}
+            <a>></a>
+            <a>>></a>
+        {% endif %}
+    </section>
+
+    <section id="catalogPage">
+
+
+        {% if object_list %}
+            <!-- First Card-Box in catalog -->
+            {% for object in object_list %}
+                <div class="card-box">
+                    <img class="ProductImg" src="{{ object.Image.url }}" alt="profile picture">
+                    <div>
+                        <div class="text-center ">
+                            <p class="name">Name: {{ object.name }}</p>
+                            <p class="price">Price: {{ object.price|floatformat:2 }}BGN</p>
+                        </div>
+                        <div class="btn-group">
+                            <a href="{% url 'details product' pk=object.pk %}">Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No Products in Catalog!</p>
+        {% endif %}
+
+    </section>
+
+
+
+{% endblock %}

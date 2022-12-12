@@ -1,0 +1,34 @@
+{% extends 'base/base.html' %}
+{% load placeholders %}
+{% load static %}
+{% block page_content %}
+    <div class="container-inline">
+        <section id="welcomePage">
+            <div id="welcome-message">
+            </div>
+            <div class="music-img">
+                <img src="{% static 'images/contrast.png' %}" alt="music-icon">
+            </div>
+        </section>
+
+        <section id="registerPage">
+            <form method="post" action="{% url 'login user' %}">
+                {% csrf_token %}
+
+                <fieldset>
+                    <legend>Profile</legend>
+                    {{ form.username.errors }}
+                    <label for="username">Username:{{ form.username|placeholder:'Username ' }}</label>
+                    {{ form.password1.errors }}
+                    <label for="username">Password:{{ form.password|placeholder:'Password ' }}</label>
+
+
+                    <button type="submit" class="register">Enter</button>
+                    <h3>Don't have an account?</h3>
+                <a class="register" href="{% url 'register user' %}">Click here!</a>
+                </fieldset>
+
+            </form>
+        </section>
+    </div>
+{% endblock %}

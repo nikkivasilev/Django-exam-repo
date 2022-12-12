@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load placeholders %}
+
+<!--Home Page-->
+{% block page_content %}
+    <div class="container-inline">
+        <section id="welcomePage">
+
+            <div class="music-img">
+                <img src="{% static 'images/contrast.png' %}" alt="music-icon">
+            </div>
+        </section>
+
+        <!-- Registration -->
+        <section id="registerPage">
+
+            <fieldset>
+                <legend>REGISTER</legend>
+
+                <form method="post" action="{% url 'register user' %}">
+                    {% csrf_token %}
+
+                    {{ form.username.errors }}
+                    <label for="username">Username:{{ form.username|placeholder:'Username ' }}</label>
+                    {{ form.email.errors }}
+                    <label for="email">Email: {{ form.email|placeholder:'Email ' }}</label>
+                    {{ form.password1.errors }}
+                    <label for="username">Password:{{ form.password1|placeholder:'Password ' }}</label>
+                    {{ form.password2.errors }}
+                    <label for="password">Confirm Password:{{ form.password2|placeholder:'Repeat password ' }}</label>
+
+                    <button type="submit" class="register">Enter</button>
+                    <h3>Have an account?</h3>
+                <a class="register" href="{% url 'login user' %}">Click here!</a>
+
+                </form>
+            </fieldset>
+
+        </section>
+    </div>
+{% endblock %}
