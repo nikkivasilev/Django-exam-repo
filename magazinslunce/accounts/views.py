@@ -58,6 +58,7 @@ class DeleteUserView(views.DeleteView):
 
         return response
 
+
 class EditUserView(LoginRequiredMixin, views.UpdateView):
     template_name = 'accounts/edit.html'
     model = UserModel
