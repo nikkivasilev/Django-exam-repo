@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import views as auth_views, get_user_model, login
@@ -57,7 +58,7 @@ class DeleteUserView(views.DeleteView):
 
         return response
 
-class EditUserView(views.UpdateView):
+class EditUserView(LoginRequiredMixin, views.UpdateView):
     template_name = 'accounts/edit.html'
     model = UserModel
     fields = ('username', 'first_name', 'last_name', 'email', 'profile_picture')

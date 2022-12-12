@@ -135,6 +135,7 @@ def order(request):
 
     return redirect('redirect to catalogue')
 
+
 @login_required
 def redirect_to_catalogue(request):
     if request.user.is_authenticated:
