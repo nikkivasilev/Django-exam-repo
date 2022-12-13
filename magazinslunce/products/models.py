@@ -2,7 +2,7 @@ from django.core import validators
 from django.db import models
 
 from magazinslunce.common.validators import validate_file_size
-
+# TODO: MAKE ACTUAL PRODUCTS
 
 class Product(models.Model):
     PRODUCT_TYPE_MAX_LENGTH = 75
