@@ -12,23 +12,22 @@
         </section>
 
         <section id="registerPage">
-            <form method="post" action="{% url 'login user' %}">
-                {% csrf_token %}
-
-                <fieldset>
-                    <legend>Profile</legend>
-                    {{ form.username.errors }}
+            <fieldset>
+                <legend>Profile</legend>
+                <form method="post" action="{% url 'login user' %}">
+                    {% csrf_token %}
                     <label for="username">Username:{{ form.username|placeholder:'Username ' }}</label>
                     {{ form.password1.errors }}
                     <label for="username">Password:{{ form.password|placeholder:'Password ' }}</label>
-
-
+                    {% if form.errors %}
+                        <li>Your username and password didn't match. Please try again.</li>
+                    {% endif %}
                     <button type="submit" class="register">Enter</button>
                     <h3>Don't have an account?</h3>
-                <a class="register" href="{% url 'register user' %}">Click here!</a>
-                </fieldset>
+                    <a class="register" href="{% url 'register user' %}">Click here!</a>
+                </form>
+            </fieldset>
 
-            </form>
         </section>
     </div>
 {% endblock %}

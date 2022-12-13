@@ -4,16 +4,10 @@ from django.views import generic as views
 from django.contrib.auth import views as auth_views, get_user_model, login
 
 from magazinslunce.accounts.forms import CreateUserForm
+from magazinslunce.accounts.utils import get_full_name
 from magazinslunce.common.models import ProductBasket
 
 UserModel = get_user_model()
-
-
-def get_full_name(obj):
-    result = [obj.first_name, obj.last_name]
-    if result[0] is not None or result[1] is not None:
-        return " ".join(result)
-    return None
 
 
 class RegisterUserView(views.CreateView):
@@ -73,5 +67,3 @@ class EditUserView(LoginRequiredMixin, views.UpdateView):
         response = super().post(request, *args, **kwargs)
         return response
 
-# USERNAME: NikolaUser
-# PASSWORD: Parola@123

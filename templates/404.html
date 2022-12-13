@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>404</title>
-</head>
-<body>
-    <p>404 error page</p>
-</body>
-</html>
+{% include 'base/base.html' %}
+
+{% block page_content %}
+    <div class="ProductPaginator">
+        <h1 class="index-header">Oh no, something broke</h1>
+        <h1 class="index-header">Error 404 - page not found</h1>
+        <p class="index-btn">
+            <a class="index-btn" href='{% url "index" %}'> BACK TO HOME</a>
+        </p>
+    </div>
+{% endblock %}
