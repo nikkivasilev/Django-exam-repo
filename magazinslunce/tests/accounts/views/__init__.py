@@ -1,0 +1,1 @@
+from .user_details_view_tests import *
