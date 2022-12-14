@@ -1,3 +1,27 @@
+.actionBtnDelete > Button {
+    width: 40%;
+    height: 50px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    display: inline;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    background-size: 200% 100%;
+    background-position: left;
+    background-repeat: no-repeat;
+    transition: 500ms;
+    color: white;
+    font-family: "Lato", serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    text-decoration: none;
+    margin-right: 50px;
+}
+
 .index-header {
     color: #0E5E6F;
     font-family: "Leelawadee", serif;
@@ -51,7 +75,7 @@
 }
 
 .wrapper {
-    height: 300px;
+    height: 550px;
     width: 900px;
     border-radius: 7px 7px 7px 7px;
     box-shadow: 0 0 1.5px 3px gray;
@@ -59,7 +83,7 @@
 }
 
 .Productwrapper {
-    height: 600px;
+    height: 550px;
     width: 1000px;
     border-radius: 7px 7px 7px 7px;
     box-shadow: 0 0 1.5px 3px gray;
@@ -125,7 +149,9 @@
 
 .albumCover img, .profilePage img {
     border-radius: 12px 0 0 7px;
-    height: 100%;
+    height: 550px;
+    width: 550px;
+
 }
 
 .profileText {
@@ -183,6 +209,7 @@
     right: 0;
     bottom: 0;
 }
+
 
 .actionBtnDelete > a {
     width: 200%;

@@ -9,10 +9,10 @@ def validate_only_letters(value):
 
 
 def validate_only_numbers(value):
-
     for ch in value:
         if not ch.isdigit():
             raise exceptions.ValidationError('Only numbers are allowed')
+
 
 def validate_file_size(value):
     limit = 5 * 1024 * 1024

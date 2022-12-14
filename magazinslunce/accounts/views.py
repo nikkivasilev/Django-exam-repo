@@ -4,7 +4,7 @@ from django.views import generic as views
 from django.contrib.auth import views as auth_views, get_user_model, login
 
 from magazinslunce.accounts.forms import CreateUserForm
-from magazinslunce.accounts.utils import get_full_name
+from magazinslunce.accounts.utils import get_full_name, get_user_products_in_basket
 from magazinslunce.common.models import ProductBasket
 
 UserModel = get_user_model()
@@ -38,7 +38,7 @@ class DetailsUserView(views.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['fullname'] = get_full_name(self.object)
-        context['products_in_basket'] = ProductBasket.objects.filter(user_id=self.request.user.pk).count()
+        context['products_in_basket'] = get_user_products_in_basket(self.request.user.pk)
         return context
 
 
@@ -62,8 +62,4 @@ class EditUserView(LoginRequiredMixin, views.UpdateView):
         return reverse_lazy('details user', kwargs={
             'pk': self.request.user.pk,
         })
-
-    def post(self, request, *args, **kwargs):
-        response = super().post(request, *args, **kwargs)
-        return response
 

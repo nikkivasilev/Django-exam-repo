@@ -1,22 +1,17 @@
 {% include 'base/base.html' %}
-
-<!-- Delete Profile Page-->
+{% block page_content %}
 <section id="detailsPage">
     <div class="wrapper">
         <div class="profileText">
-
-            <!-- Delete Profile Form -->
             <h1 style="margin-bottom: 28px">Are you sure you want to delete your profile?</h1>
             <form method="post" action="{% url 'delete user' pk=request.user.pk %}">
-                <!-- Confirm Button -->
                 {{ form }}
                 {% csrf_token %}
-                <button type="submit" class="actionBtnDelete">
-                    <a>Delete</a>
-                </button>
+                <div class="actionBtnDelete">
+                <button type="submit" class="actionBtnDelete">Delete your profile</button>
+                </div>
             </form>
-            <!-- End Delete Profile Form -->
-
         </div>
     </div>
 </section>
+{% endblock %}

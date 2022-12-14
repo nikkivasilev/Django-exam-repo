@@ -1,9 +1,9 @@
 from magazinslunce.common.models import ProductLike, ProductRating, ProductComment, ProductBasket
+from magazinslunce.products.models import Product
 
 
 def get_product_likes(pk):
-    total_likes = ProductLike.objects.filter(product_id=pk).count()
-    return total_likes
+    return ProductLike.objects.filter(product_id=pk).count()
 
 
 def get_product_rating(pk):
@@ -23,13 +23,18 @@ def get_product_comments(pk):
     return ProductComment.objects.filter(product_id=pk).all()
 
 
-def GetProductsPks(user_id):
+def get_products_pks(user_id):
     basket = ProductBasket.objects.filter(user_id=user_id).all()
-    products = [obj.product_id for obj in basket]
-    if products:
-        return products
+    products_pks = [obj.product_id for obj in basket]
+    return products_pks
 
-    return []
+
+def get_user_products(user_id):
+    product_pks = get_products_pks(user_id)
+    products = []
+    for product_pk in product_pks:
+        products.append(Product.objects.filter(pk=product_pk).get())
+    return products
 
 
 def user_rated_product(product_pk, user_pk):

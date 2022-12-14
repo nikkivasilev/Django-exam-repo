@@ -2,7 +2,6 @@
 {% load static %}
 {% load placeholders %}
 
-<!--Home Page-->
 {% block page_content %}
     <div class="container-inline">
         <section id="welcomePage">
@@ -11,13 +10,9 @@
                 <img src="{% static 'images/contrast.png' %}" alt="music-icon">
             </div>
         </section>
-
-        <!-- Registration -->
         <section id="registerPage">
-
             <fieldset>
                 <legend>REGISTER</legend>
-
                 <form method="post" action="{% url 'register user' %}">
                     {% csrf_token %}
                     {{ form.username.errors }}

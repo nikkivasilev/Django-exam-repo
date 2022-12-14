@@ -1,23 +1,18 @@
 {% extends 'base/base.html' %}
 {% load placeholders %}
 {% load static %}
-<!--Home Page-->
 {% block page_content %}
     <div class="container-inline">
         <section id="welcomePage">
             <div id="welcome-message">
-
             </div>
             <div class="music-img">
                 <img src="{% static 'images/contrast.png' %}" alt="music-icon">
             </div>
         </section>
-
-        <!-- Registration -->
         <section id="registerPage">
             <form method="post" enctype="multipart/form-data" action="{% url 'edit user' pk=request.user.pk %}">
                 {% csrf_token %}
-
                 <fieldset>
                     <legend>EDIT</legend>
                     {{ form.username.errors }}
@@ -30,9 +25,8 @@
                     <label for="Email">Email:{{ form.email|placeholder:'Email ' }}</label>
                     {{ form.profile_picture.errors }}
                     <label for="Profile Picture">Profile Picture:{{ form.profile_picture|placeholder:'Profile picture ' }}</label>
-                    <!-- Button to Create Profile -->
-                    <button type="submit" class="register">Enter</button>
 
+                    <button type="submit" class="register">Enter</button>
                 </fieldset>
             </form>
         </section>

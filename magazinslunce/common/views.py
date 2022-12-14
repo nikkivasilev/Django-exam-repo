@@ -5,8 +5,8 @@ from django.views import generic as view
 
 from magazinslunce.common.forms import ProductRatingForm, CommentForm
 from magazinslunce.common.models import ProductBasket, ProductLike
-from magazinslunce.common.utils import get_product_url, GetProductsPks, user_rated_product, \
-    sum_total_checkout_price
+from magazinslunce.common.utils import get_product_url, get_products_pks, user_rated_product, \
+    sum_total_checkout_price, get_user_products
 from magazinslunce.products.models import Product
 
 
@@ -26,16 +26,9 @@ class ProductsBasketView(LoginRequiredMixin, view.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.user.is_authenticated:
-            context['user_basket'] = ProductBasket.objects.filter(user_id=self.request.user.pk).order_by(
-                'product__name')
-            context['total_sum'] = sum_total_checkout_price(self.request.user.pk)
-            product_pks = GetProductsPks(self.request.user.pk)
-            if product_pks:
-                products = []
-                for product_pk in product_pks:
-                    products.append(Product.objects.filter(pk=product_pk).get())
-                context['products'] = products
+        context['user_basket'] = ProductBasket.objects.filter(user_id=self.request.user.pk).order_by('product__name')
+        context['total_sum'] = sum_total_checkout_price(self.request.user.pk)
+        context['products'] = get_user_products(self.request.user.pk)
 
         return context
 

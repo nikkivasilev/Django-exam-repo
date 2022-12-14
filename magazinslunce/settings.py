@@ -107,3 +107,4 @@ LOGIN_REDIRECT_URL = reverse_lazy('index')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# TODO: MAKE ACTUAL PRODUCTS

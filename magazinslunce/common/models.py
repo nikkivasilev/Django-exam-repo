@@ -1,20 +1,18 @@
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.db.models import PositiveIntegerField
 
 from magazinslunce.products.models import Product
-
-# Create your models here.
 
 UserModel = get_user_model()
 
 
 class ProductComment(models.Model):
+    MAX_TEXT_LENGTH = 300
+
     class Meta:
         ordering = ["-publication_date_and_time"]
 
-    MAX_TEXT_LENGTH = 300
     text = models.CharField(
         max_length=MAX_TEXT_LENGTH,
         null=False,

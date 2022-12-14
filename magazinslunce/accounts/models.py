@@ -5,10 +5,6 @@ from django.db import models
 from magazinslunce.common.validators import validate_only_letters, validate_file_size
 
 
-# Create your models here.
-
-
-
 class AppUser(auth_models.AbstractUser):
     MIN_LEN_FIRST_NAME = 2
     MAX_LEN_FIRST_NAME = 30
@@ -41,7 +37,7 @@ class AppUser(auth_models.AbstractUser):
 
     profile_picture = models.ImageField(
         upload_to='profile_pictures',
-        validators=[validate_file_size,],
+        validators=[validate_file_size, ],
         null=True,
         blank=True,
     )

@@ -1,63 +1,57 @@
 {% load placeholders %}
 {% include 'base/base.html' %}
-<!--Details Page-->
-<section id="detailsPage">
-    <div class="Productwrapper">
-
-        <div class="albumCover">
-            <!-- Album Image -->
-            <img src="{{ product.Image.url }}" alt="Product Image">
+{% block page_content %}
+    <section id="detailsPage">
+        <div class="Productwrapper">
+            <div class="albumCover">
+                <img src="{{ product.Image.url }}" alt="Product Image">
+            </div>
+            <div class="albumInfo">
+                <div class="albumText">
+                    <h1 class="albumText">Name: {{ object.name }}</h1>
+                    <h1 class="albumText">Type: {{ object.type }}</h1>
+                    <h1 class="albumText">Rating: {{ product_rating }}</h1>
+                    <h1 class="albumText">Likes: {{ product_likes }}</h1>
+                    <h1 class="albumText">Price: {{ object.price }}BNG</h1>
+                    {% if object.description %}
+                        <p class="albumText">Description: {{ object.description }}</p>
+                    {% endif %}
+                </div>
+                <div class="actionBtn">
+                    {% if user_liked_product %}
+                        <a href="{% url 'like product' pk=product.pk %}" class="edit">Dislike</a>
+                    {% else %}
+                        <a href="{% url 'like product' pk=product.pk %}" class="actionBtnDelete">Like</a>
+                    {% endif %}
+                    <a href="{% url 'add product to basket' pk=product.pk %}" class="remove">Add to Cart</a>
+                </div>
+                {% if not user_rated_product %}
+                    <div class="albumText">
+                        <form class="actionBtn align-content-start" method="post"
+                              action="{% url 'rate product' pk=product.pk %}">
+                            <label>
+                                {{ rate_form.rating|placeholder:'Rate 0-5' }}
+                                <button type="submit" class="register">Rate product</button>
+                            </label>
+                            {% csrf_token %}
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
         </div>
-
-        <div class="albumInfo">
-
-            <div class="albumText">
-                <!-- Album Info -->
-                <h1 class="albumText">Name: {{ object.name }}</h1>
-                <h1 class="albumText">Type: {{ object.type }}</h1>
-                <h1 class="albumText">Rating: {{ product_rating }}</h1>
-                <h1 class="albumText">Likes: {{ product_likes }}</h1>
-                <h1 class="albumText">Price: {{ object.price }}BNG</h1>
-
-                <p class="albumText">Description: {{ object.description }}</p>
-            </div>
-
-            <div class="actionBtn">
-                <!-- Album Buttons -->
-                <a href="{% url 'like product' pk=product.pk %}" class="edit">Like</a>
-                <a href="{% url 'add product to basket' pk=product.pk %}" class="remove">Add to Cart</a>
-
-            </div>
-            <div class="albumText">
-            <form class="actionBtn align-content-start" method="post" action="{% url 'rate product' pk=product.pk %}">
-                <label>
-
-                    {{ rate_form.rating|placeholder:'Rate' }}
-
-                    <button type="submit" class="register">Rate product</button>
-
-                </label>
+    </section>
+    <section id="detailsPage">
+        <div class="commentswrapper">
+            <form class="actionBtn" method="post" action="{% url 'comment product' pk=product.pk %}">
                 {% csrf_token %}
-
+                <label class="commentText">
+                    {{ comment_form.text }}
+                    <button class="register" type="submit">Post</button>
+                </label>
             </form>
-            </div>
-
+            {% for comment in product_comments %}
+                <p class="comment">{{ comment.user }}: {{ comment.text }} - {{ comment.publication_date_and_time }}</p>
+            {% endfor %}
         </div>
-    </div>
-</section>
-<section id="detailsPage">
-    <div class="commentswrapper">
-        <form class="actionBtn" method="post" action="{% url 'comment product' pk=product.pk %}">
-            {% csrf_token %}
-            <labe class="commentText">
-
-                {{ comment_form.text }}
-                <button class="register" type="submit">Post</button>
-            </labe>
-        </form>
-        {% for comment in product_comments %}
-            <p class="comment">{{ comment.user }}: {{ comment.text }} - {{ comment.publication_date_and_time }}</p>
-        {% endfor %}
-
-    </div>
-</section>
+    </section>
+{% endblock %}

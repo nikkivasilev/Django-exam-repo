@@ -1,43 +1,35 @@
 {% load static %}
-
 {% include 'base/base.html' %}
-
-
-<!--Details Page-->
+{% block page_content %}
 <section id="detailsPage">
     <div class="wrapper">
         {% if user.profile_picture %}
-        <div class="profilePage">
-            <img src="{{ user.profile_picture.url }}"
-                 alt="Profile Image">
-        </div>
+            <div class="profilePage">
+                <img src="{{ user.profile_picture.url }}"
+                     alt="Profile Image">
+            </div>
         {% else %}
-        <div class="profilePage">
-            <img src="{% static 'images/blank-profile-picture-973460_1280.jpeg' %}"
-                 alt="Profile Image">
-        </div>
+            <div class="profilePage">
+                <img src="{% static 'images/blank-profile-picture-973460_1280.jpeg' %}"
+                     alt="Profile Image">
+            </div>
         {% endif %}
-
         <div class="profileText">
-            <!-- Profile Info -->
             <h1>Username: {{ user.username }}</h1>
             <h1>Email: {{ user.email }}</h1>
             {% if fullname %}
-            <h1>Name: {{ fullname }}</h1>
+                <h1>Name: {{ fullname }}</h1>
             {% endif %}
             {% if products_in_basket %}
-            <h1>Total products in basket: {{ products_in_basket }} </h1>
+                <h1>Total products in basket: {{ products_in_basket }} </h1>
             {% endif %}
         </div>
-
         <div class="actionBtn">
-            <!-- Button for Deleting the Profile -->
             <a href="{% url 'edit user' pk=request.user.pk %}" class="remove">Edit</a>
         </div>
         <div class="actionBtnDelete">
             <a href="{% url 'delete user' pk=request.user.pk %}">Delete</a>
         </div>
-
-
     </div>
 </section>
+{% endblock %}

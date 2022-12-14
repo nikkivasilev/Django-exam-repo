@@ -1,5 +1,4 @@
 from django import forms
-
 from magazinslunce.common.models import ProductRating, ProductComment
 
 
