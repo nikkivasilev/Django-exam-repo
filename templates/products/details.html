@@ -12,7 +12,7 @@
                     <h1 class="albumText">Type: {{ object.type }}</h1>
                     <h1 class="albumText">Rating: {{ product_rating }}</h1>
                     <h1 class="albumText">Likes: {{ product_likes }}</h1>
-                    <h1 class="albumText">Price: {{ object.price }}BNG</h1>
+                    <h1 class="albumText">Price: {{ object.price|floatformat:2 }}BNG</h1>
                     {% if object.description %}
                         <p class="albumText">Description: {{ object.description }}</p>
                     {% endif %}

@@ -11,7 +11,7 @@
                 {% for obj in user_basket %}
                     <div class="comment">
                         <p class="col-1">{{ obj.product.name }}</p>
-                        <div class="actionBtn col-2">
+                        <div class="actionBtn col-2 align-content-end">
                             <a class="actionBtnDelete col-1"
                                href="{% url 'delete product from basket' pk=obj.product.pk %}">Cancel</a>
                             <a class="actionBtn col-2" href="{% url 'subtract from basket' pk=obj.product.pk %}">-</a>
@@ -33,8 +33,6 @@
                         </div>
                         <div class="btn-group">
                             <a href="{% url 'details product' pk=object.pk %}">Details</a>
-                        </div>
-                        <div class="btn-group">
                             <a href="{% url 'delete product from basket' pk=object.pk %}">Cancel</a>
                         </div>
                     </div>

@@ -37,6 +37,9 @@ class ProductComment(models.Model):
         on_delete=models.CASCADE,
     )
 
+    def __str__(self):
+        return f"{self.product} - {self.user}: {self.publication_date_and_time}"
+
 
 class ProductLike(models.Model):
     product = models.ForeignKey(
@@ -50,6 +53,9 @@ class ProductLike(models.Model):
         UserModel,
         on_delete=models.CASCADE,
     )
+
+    def __str__(self):
+        return f"{self.product} - {self.user}"
 
 
 class ProductRating(models.Model):
@@ -73,9 +79,12 @@ class ProductRating(models.Model):
         on_delete=models.CASCADE,
     )
 
+    def __str__(self):
+        return f"{self.rating} : {self.product} - {self.user}"
+
 
 class ProductBasket(models.Model):
-    ordering = ('quantity', )
+    ordering = ('quantity',)
 
     quantity = models.PositiveIntegerField(
         null=False,
@@ -93,3 +102,6 @@ class ProductBasket(models.Model):
         UserModel,
         on_delete=models.CASCADE,
     )
+
+    def __str__(self):
+        return f"{self.product} - {self.user}"

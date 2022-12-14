@@ -9,7 +9,7 @@ class Product(models.Model):
     PRODUCT_NAME_MAX_LENGTH = 75
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('type',)
 
     name = models.CharField(
         max_length=PRODUCT_NAME_MAX_LENGTH,
@@ -42,3 +42,6 @@ class Product(models.Model):
         null=False,
         blank=False,
     )
+
+    def __str__(self):
+        return f'{self.name} - {self.type}'
