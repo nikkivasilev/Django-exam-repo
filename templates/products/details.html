@@ -49,9 +49,14 @@
                     <button class="register" type="submit">Post</button>
                 </label>
             </form>
-            {% for comment in product_comments %}
-                <p class="comment">{{ comment.user }}: {{ comment.text }} - {{ comment.publication_date_and_time }}</p>
-            {% endfor %}
+            {% if product_comments %}
+                {% for comment in product_comments %}
+                    <p class="comment">{{ comment.user }}: {{ comment.text }}
+                        - {{ comment.publication_date_and_time }}</p>
+                {% endfor %}
+            {% else %}
+                <h1 class="index-header">No one has commented yet. Be the first one!</h1>
+            {% endif %}
         </div>
     </section>
 {% endblock %}
