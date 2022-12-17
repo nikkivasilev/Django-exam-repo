@@ -5,7 +5,7 @@ from django.contrib.auth import views as auth_views, get_user_model, login
 
 from magazinslunce.accounts.forms import CreateUserForm
 from magazinslunce.accounts.utils import get_full_name, get_user_products_in_basket
-from magazinslunce.common.models import ProductBasket
+
 
 UserModel = get_user_model()
 

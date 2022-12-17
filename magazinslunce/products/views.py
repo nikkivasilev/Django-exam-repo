@@ -3,17 +3,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic as views
 
 from magazinslunce.common.forms import ProductRatingForm, CommentForm
-from magazinslunce.common.models import ProductLike
-from magazinslunce.common.utils import get_product_likes, get_product_rating, get_product_comments, user_rated_product
+from magazinslunce.common.utils import get_product_likes, get_product_rating, get_product_comments, user_rated_product, \
+    user_liked_product
 from magazinslunce.products.models import Product
 
 UserModel = get_user_model()
-
-
-def user_liked_product(product_pk, user_pk):
-    if ProductLike.objects.filter(product_id=product_pk, user_id=user_pk).count() >= 1:
-        return True
-    return False
 
 
 class DetailsProductView(LoginRequiredMixin, views.DetailView):

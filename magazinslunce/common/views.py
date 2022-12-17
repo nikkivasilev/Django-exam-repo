@@ -5,7 +5,7 @@ from django.views import generic as view
 
 from magazinslunce.common.forms import ProductRatingForm, CommentForm
 from magazinslunce.common.models import ProductBasket, ProductLike
-from magazinslunce.common.utils import get_product_url, get_products_pks, user_rated_product, \
+from magazinslunce.common.utils import get_product_url, user_rated_product, \
     sum_total_checkout_price, get_user_products
 from magazinslunce.products.models import Product
 

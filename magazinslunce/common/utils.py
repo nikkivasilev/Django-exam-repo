@@ -37,6 +37,12 @@ def get_user_products(user_id):
     return products
 
 
+def user_liked_product(product_pk, user_pk):
+    if ProductLike.objects.filter(product_id=product_pk, user_id=user_pk).count() >= 1:
+        return True
+    return False
+
+
 def user_rated_product(product_pk, user_pk):
     obj = ProductRating.objects.filter(product_id=product_pk, user_id=user_pk)
     if obj:
