@@ -4,8 +4,7 @@ from django.views import generic as views
 from django.contrib.auth import views as auth_views, get_user_model, login
 
 from magazinslunce.accounts.forms import CreateUserForm
-from magazinslunce.accounts.utils import get_full_name, get_user_products_in_basket
-
+from magazinslunce.accounts.utils import get_user_products_in_basket, get_full_name
 
 UserModel = get_user_model()
 

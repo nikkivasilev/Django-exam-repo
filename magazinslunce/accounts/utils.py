@@ -2,9 +2,11 @@ from magazinslunce.common.models import ProductBasket
 
 
 def get_full_name(obj):
-    result = [obj.first_name, obj.last_name]
-    if result[0] is not None or result[1] is not None:
-        return " ".join(result)
+    first_name = obj.first_name if obj.first_name else ''
+    last_name = obj.last_name if obj.last_name else ''
+
+    if first_name or last_name:
+        return first_name + ' ' + last_name
     return None
 
 
