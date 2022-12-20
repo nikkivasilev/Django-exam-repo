@@ -1,2 +1,2 @@
 # magazinslunce
-Project repository for project defense
+Project repository for project defence
