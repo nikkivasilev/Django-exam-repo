@@ -20,12 +20,13 @@
             {% if fullname %}
                 <h1>Name: {{ fullname }}</h1>
             {% endif %}
-            {% if products_in_basket %}
-                <h1>Total products in basket: {{ products_in_basket }} </h1>
+            {% if products_liked %}
+                <h1>Total products liked: {{ products_liked }} </h1>
             {% endif %}
         </div>
         <div class="actionBtn">
             <a href="{% url 'edit user' pk=request.user.pk %}" class="remove">Edit</a>
+            <a href="{% url 'liked products'%}" class="remove">Liked products</a>
         </div>
         <div class="actionBtnDelete">
             <a href="{% url 'delete user' pk=request.user.pk %}">Delete</a>

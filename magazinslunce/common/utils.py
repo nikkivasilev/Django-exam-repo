@@ -23,14 +23,14 @@ def get_product_comments(pk):
     return ProductComment.objects.filter(product_id=pk).all()
 
 
-def get_products_pks(user_id):
-    basket = ProductBasket.objects.filter(user_id=user_id).all()
-    products_pks = [obj.product_id for obj in basket]
+def get_products_pks(user, objs):
+    objects = objs.objects.filter(user_id=user.id).all()
+    products_pks = [obj.product_id for obj in objects]
     return products_pks
 
 
-def get_user_products(user_id):
-    product_pks = get_products_pks(user_id)
+def get_user_products(user, objs):
+    product_pks = get_products_pks(user, objs)
     products = []
     for product_pk in product_pks:
         products.append(Product.objects.filter(pk=product_pk).get())

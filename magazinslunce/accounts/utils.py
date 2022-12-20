@@ -1,4 +1,4 @@
-from magazinslunce.common.models import ProductBasket
+from magazinslunce.common.models import ProductLike
 
 
 def get_full_name(obj):
@@ -10,5 +10,5 @@ def get_full_name(obj):
     return None
 
 
-def get_user_products_in_basket(pk):
-    return ProductBasket.objects.filter(user_id=pk).count()
+def get_user_products_liked(pk):
+    return ProductLike.objects.filter(user_id=pk).count()

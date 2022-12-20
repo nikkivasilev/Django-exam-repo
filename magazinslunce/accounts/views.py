@@ -4,7 +4,7 @@ from django.views import generic as views
 from django.contrib.auth import views as auth_views, get_user_model, login
 
 from magazinslunce.accounts.forms import CreateUserForm
-from magazinslunce.accounts.utils import get_user_products_in_basket, get_full_name
+from magazinslunce.accounts.utils import get_user_products_liked, get_full_name
 
 UserModel = get_user_model()
 
@@ -37,7 +37,7 @@ class DetailsUserView(views.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['fullname'] = get_full_name(self.object)
-        context['products_in_basket'] = get_user_products_in_basket(self.request.user.pk)
+        context['products_liked'] = get_user_products_liked(self.request.user.pk)
         return context
 
 

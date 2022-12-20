@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+
+{% block page_content %}
+    <section id="catalogPage">
+        {% if products %}
+            <div class="actionBtn">
+                <a href="{% url 'details user' pk=request.user.pk %}">BACK TO PROFILE</a>
+            </div>
+            <p class="commentText">Liked Products!</p>
+            {% for object in products %}
+                <div class="card-box">
+                    <img class="ProductImg" src="{{ object.Image.url }}" alt="profile picture">
+                    <div>
+                        <div class="text-center ">
+                            <p class="name">Name: {{ object.name }}</p>
+                            <p class="price">Price: {{ object.price|floatformat:2 }}BGN</p>
+                        </div>
+                        <div class="btn-group">
+                            <a href="{% url 'details product' pk=object.pk %}">Details</a>
+                            <a href="{% url 'like product' pk=object.pk %}">Dislike</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="actionBtn">
+                <a href="{% url 'details user' pk=request.user.pk %}">BACK TO PROFILE</a>
+            </div>
+            <p class="commentText">No Liked Products!</p>
+        {% endif %}
+    </section>
+{% endblock %}
