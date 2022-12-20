@@ -20,8 +20,6 @@ class DetailsProductView(LoginRequiredMixin, views.DetailView):
         context['user_liked_product'] = user_liked_product(self.object.pk, self.request.user.pk)
         context['user_rated_product'] = user_rated_product(self.object.pk, self.request.user.pk)
         context['product_rating'] = get_product_rating(self.object.pk)
-        context['product_comments'] = get_product_comments(self.object)
         context['rate_form'] = ProductRatingForm()
-        context['comment_form'] = CommentForm()
 
         return context

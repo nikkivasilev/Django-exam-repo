@@ -4,9 +4,9 @@ from django.shortcuts import render, redirect
 from django.views import generic as view
 
 from magazinslunce.common.forms import ProductRatingForm, CommentForm
-from magazinslunce.common.models import ProductBasket, ProductLike
+from magazinslunce.common.models import ProductBasket, ProductLike, ProductComment
 from magazinslunce.common.utils import get_product_url, user_rated_product, \
-    sum_total_checkout_price, get_user_products
+    sum_total_checkout_price, get_user_products, get_product_comments
 from magazinslunce.products.models import Product
 
 
@@ -33,8 +33,19 @@ class ProductsBasketView(LoginRequiredMixin, view.ListView):
         return context
 
 
+class ProductCommentsView(LoginRequiredMixin, view.DetailView):
+    template_name = 'products/product-comments.html'
+    model = Product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_comments'] = get_product_comments(self.object)
+        context['comment_form'] = CommentForm()
+        return context
+
+
 @login_required
-def comment_product(request, pk):
+def create_comment_product(request, pk):
     if request.method == "POST":
         product = Product.objects.get(id=pk)
         form = CommentForm(request.POST)
@@ -42,9 +53,17 @@ def comment_product(request, pk):
             comment = form.save(commit=False)
             comment.product = product
             comment.user = request.user
-            comment.save()
+            form.save()
+            return redirect(get_product_url(request))
 
-        return redirect(get_product_url(request))
+
+@login_required
+def delete_product_comment(request, pk):
+    comment = ProductComment.objects \
+        .filter(id=pk, user_id=request.user.pk)
+    if comment:
+        comment.delete()
+    return redirect(get_product_url(request))
 
 
 @login_required
@@ -53,13 +72,11 @@ def rate_product(request, pk):
         form = ProductRatingForm(request.POST)
         product = Product.objects.get(id=pk)
         already_rated = user_rated_product(pk, request.user.pk)
-
         if form.is_valid() and not already_rated:
             rating = form.save(commit=False)
             rating.product = product
             rating.user = request.user
             rating.save()
-
         return redirect(get_product_url(request))
 
 
@@ -67,7 +84,6 @@ def rate_product(request, pk):
 def like_product(request, pk):
     user_liked_products = ProductLike.objects \
         .filter(product_id=pk, user_id=request.user.pk)
-
     if user_liked_products:
         user_liked_products.delete()
     else:
@@ -75,7 +91,6 @@ def like_product(request, pk):
             product_id=pk,
             user_id=request.user.pk,
         )
-
     return redirect(get_product_url(request))
 
 
@@ -83,7 +98,6 @@ def like_product(request, pk):
 def add_product_to_basket(request, pk):
     user_basket_product = ProductBasket.objects \
         .filter(product_id=pk, user_id=request.user.pk)
-
     if not user_basket_product:
         ProductBasket.objects.create(
             product_id=pk,
@@ -102,19 +116,19 @@ def add_product_to_basket(request, pk):
 def subtract_product_from_basket(request, pk):
     product = ProductBasket.objects \
         .filter(product_id=pk, user_id=request.user.pk).get()
-
     if product.quantity <= 1:
         return delete_product_from_basket(request, pk)
     product.quantity -= 1
     product.save()
-
     return redirect(get_product_url(request))
 
 
 @login_required
 def delete_product_from_basket(request, pk):
-    ProductBasket.objects \
-        .filter(product_id=pk, user_id=request.user.pk).delete()
+    product = ProductBasket.objects \
+        .filter(product_id=pk, user_id=request.user.pk)
+    if product:
+        product.delete()
     return redirect('basket')
 
 
@@ -125,7 +139,6 @@ def order(request):
         for product in user_basket_products:
             ProductBasket.objects.get(product_id=product.product_id, user_id=request.user.pk).delete()
         return render(request, 'common/order-made.html')
-
     return redirect('redirect to catalogue')
 
 

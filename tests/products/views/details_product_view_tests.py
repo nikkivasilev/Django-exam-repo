@@ -1,6 +1,6 @@
 
 from magazinslunce.products.models import Product
-from tests.products.BaseTest_case import TestCaseBase
+from tests.products.BaseTestCase import TestCaseBase
 
 
 class DetailsProductView(TestCaseBase):
