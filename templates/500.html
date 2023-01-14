@@ -1,0 +1,11 @@
+{% include 'base/base.html' %}
+
+{% block page_content %}
+    <div class="ProductPaginator">
+        <h1 class="index-header">Oh no, something broke</h1>
+        <h1 class="index-header">Error 500 - Server Error</h1>
+        <p class="index-btn">
+            <a class="index-btn" href='{% url "index" %}'> BACK TO HOME</a>
+        </p>
+    </div>
+{% endblock %}

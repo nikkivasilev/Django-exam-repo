@@ -23,7 +23,7 @@
                     {% else %}
                         <a href="{% url 'like product' pk=product.pk %}" class="actionBtnDelete">Like</a>
                     {% endif %}
-                    <a href="{% url 'add product to basket' pk=product.pk %}" class="remove">Add to Cart</a>
+                    <a href="{% url 'add product to basket' pk=product.pk %}" class="remove">Add to cart</a>
                     <a href="{% url 'product comments' pk=product.pk %}">Comments</a>
 
                 </div>
@@ -42,23 +42,5 @@
             </div>
         </div>
     </section>
-    <section id="detailsPage">
-        <div class="commentswrapper">
-            {#            <form class="actionBtn" method="post" action="{% url 'comment product' pk=product.pk %}">#}
-            {#                {% csrf_token %}#}
-            {#                <label class="commentText">#}
-            {#                    {{ comment_form.text }}#}
-            {#                    <button class="register" type="submit">Post</button>#}
-            {#                </label>#}
-            {#            </form>#}
-            {#            {% if product_comments %}#}
-            {#                {% for comment in product_comments %}#}
-            {#                    <p class="comment">{{ comment.user }}: {{ comment.text }}#}
-            {#                        - {{ comment.publication_date_and_time }}</p>#}
-            {#                {% endfor %}#}
-            {#            {% else %}#}
-            {#                <h1 class="index-header">No one has commented yet. Be the first one!</h1>#}
-            {#            {% endif %}#}
-        </div>
-    </section>
+
 {% endblock %}

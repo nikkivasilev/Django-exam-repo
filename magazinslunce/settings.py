@@ -8,7 +8,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lp#v_wxi&1b6&m-!r$4t6o*o(%30u@)_(xh*f9np2sltx#^1ia'
 
 DEBUG = True
-
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
@@ -105,4 +104,3 @@ LOGIN_URL = reverse_lazy('login user')
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
